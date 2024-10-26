@@ -1,15 +1,5 @@
-import { BarChart } from '@mui/x-charts/BarChart';
 import FileUpload from './FileUpload';
 import Logs from './Logs';
-import { 
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardContent
-} from "./components/ui/Card";
-import AnalyticsDashboard from './AnalyticsDashboard';
 import TextileDashboard from './AnalyticsDashboard';
 
 const pedidos = [
