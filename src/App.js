@@ -1,15 +1,26 @@
+import React, { useEffect, useState } from 'react';
 import FileUpload from './FileUpload';
-import Logs from './Logs';
+import LogsClients from './LogsClients';
+import LogsSuppliers from './LogsSuppliers';
 import TextileDashboard from './AnalyticsDashboard';
 
-const pedidos = [
-  { id: 3, cliente: "João", data: "2024-10-25", status: "Enviado" },
-  { id: 2, cliente: "Maria", data: "2024-10-24", status: "Processando" },
-  { id: 1, cliente: "Carlos", data: "2024-10-23", status: "Concluído" },
-];
-
 function App() {
-  
+  const [pedidos, setPedidos] = useState([]);
+
+  useEffect(() => {
+    const fetchPedidos = async () => {
+      try {
+        const response = await fetch('https://api.exemplo.com/pedidos');
+        const data = await response.json();
+        setPedidos(data);
+      } catch (error) {
+        console.error('Erro ao buscar os pedidos:', error);
+      }
+    };
+
+    fetchPedidos();
+  }, []);
+
   return (
     <div className="App">
       <header className="bg-blue-300 py-4">
@@ -21,7 +32,10 @@ function App() {
       <main>
         <TextileDashboard />
 
-          <Logs pedidos={pedidos} />
+        <div className='flex justify-around'>
+          <LogsClients pedidos={pedidos} />
+          <LogsSuppliers pedidos={pedidos} />
+        </div>
 
         <FileUpload />
       </main>
