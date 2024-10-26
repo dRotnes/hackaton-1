@@ -79,7 +79,6 @@ const TextileDashboard = () => {
   };
 
   const kpiValue = calculateGrowthRate();
-  const isPositive = kpiValue > 0;
 
   return (
     <div className="p-4">
@@ -120,7 +119,7 @@ const TextileDashboard = () => {
           
           <YAxis
             label={{ 
-              value: 'Stock Quantity', 
+              value: 'Stock (m/m²/m³)', 
               angle: -90, 
               position: 'insideLeft',
               offset: 3
@@ -137,69 +136,43 @@ const TextileDashboard = () => {
     </div>
   </CardContent>
 </Card>
-
-{/* Size Distribution Bar Chart */}
 <Card className="col-span-2 lg:col-span-1">
-  <CardHeader>
-    <CardTitle>Order Distribution</CardTitle>
-  </CardHeader>
-  <CardContent>
-    <div className="h-80">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={barChartData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          
-          <YAxis
-            label={{ 
-              value: 'Orders ', 
-              angle: -90, 
-              position: 'insideLeft',
-              offset: 3
-            }}
-          />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="XS" fill="#8884d8" name="XS" />
-          <Bar dataKey="S" fill="#82ca9d" name="S" />
-          <Bar dataKey="M" fill="#ffc658" name="M" />
-          <Bar dataKey="L" fill="#ff8042" name="L" />
-          <Bar dataKey="XL" fill="#e88be4" name="XL" />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-  </CardContent>
-</Card>
-        {/* KPI Card */}
-        <Card>
           <CardHeader>
-            <CardTitle>Monthly Growth Rate</CardTitle>
+            <CardTitle>Order Distribution</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex items-center justify-center space-x-2">
-              <div className="text-4xl font-bold">
-                {kpiValue}%
-              </div>
-              {isPositive ? (
-                <TrendingUp className="h-8 w-8 text-green-500" />
-              ) : (
-                <TrendingDown className="h-8 w-8 text-red-500" />
-              )}
+            <div className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={barChartData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis 
+                    dataKey="product" 
+                    label={{ 
+                      position: 'insideBottom', 
+                      offset: -5 
+                    }}
+                  />
+                  <YAxis
+                    label={{ 
+                      value: 'Orders ', 
+                      angle: -90, 
+                      position: 'insideLeft',
+                      offset: 3
+                    }}
+                  />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="XS" fill="#8884d8" name="XS" />
+                  <Bar dataKey="S" fill="#82ca9d" name="S" />
+                  <Bar dataKey="M" fill="#ffc658" name="M" />
+                  <Bar dataKey="L" fill="#ff8042" name="L" />
+                  <Bar dataKey="XL" fill="#e88be4" name="XL" />
+                </BarChart>
+              </ResponsiveContainer>
             </div>
-            <p className="text-center text-sm text-muted-foreground mt-2">
-              Compared to previous month
-            </p>
           </CardContent>
         </Card>
-
-        {/* Empty Space for Future Implementation */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Future Implementation</CardTitle>
-          </CardHeader>
-          <CardContent className="h-40 flex items-center justify-center">
-            <p className="text-muted-foreground">Space reserved for additional metrics</p>
-          </CardContent>
-        </Card>
+        
       </div>
     </div>
   );
