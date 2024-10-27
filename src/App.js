@@ -5,21 +5,6 @@ import LogsSuppliers from './LogsSuppliers';
 import TextileDashboard from './AnalyticsDashboard';
 
 function App() {
-  const [pedidos, setPedidos] = useState([]);
-
-  useEffect(() => {
-    const fetchPedidos = async () => {
-      try {
-        const response = await fetch('https://api.exemplo.com/pedidos');
-        const data = await response.json();
-        setPedidos(data);
-      } catch (error) {
-        console.error('Erro ao buscar os pedidos:', error);
-      }
-    };
-
-    fetchPedidos();
-  }, []);
 
   return (
     <div className="App">
@@ -31,11 +16,6 @@ function App() {
 
       <main>
         <TextileDashboard />
-
-        <div className='flex justify-around'>
-          <LogsClients pedidos={pedidos} />
-          <LogsSuppliers pedidos={pedidos} />
-        </div>
 
         <FileUpload />
       </main>

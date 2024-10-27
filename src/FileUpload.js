@@ -38,7 +38,7 @@ function FileUpload() {
       formData.append('file', file);
 
       // Fazer a requisição POST
-      const response = await fetch('localhost:3000/orders/new', {
+      const response = await fetch('http://localhost:3000/orders/new', {
         method: 'POST',
         body: formData
       });
